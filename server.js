@@ -1,6 +1,13 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 
 app.use(express.static(__dirname + '/public/'));
 
-app.listen(process.env.Port || 8080, () => console.log('All is ok'));
+app.get('/*', function(req,res) {
+res.sendFile(path.join(__dirname+'/public/index.html'));
+});
+
+let port = process.env.PORT || 8080
+app.listen(port, ()=> console.log('All is ok'));
+
